@@ -1,4 +1,4 @@
-#v1.1
+#v1.1.2
 
 # 定义一个函数，实现判断输入的id 获取type
 
@@ -15,16 +15,14 @@ def check_isuser(id):
     val=str(id)  #转为字符类型
     success=0  #定义匹配成功的次数
     for typename in condition_types.keys():#用键迭代
-        for x in condition_types[typename][0]:
-            if val.startswith(x):  #判断开头字段匹配
-                for y in condition_types[typename][1]:
-                    if len(val)==y:  #判断id长度
-                        print(typename) #匹配成功输出type名
-                        success+=1  #匹配成功次数+1
-                        return typename
+        for x in condition_types[typename][0]:  #开头字段迭代
+            if val.startswith(x) and len(val) in condition_types[typename][1]:  #匹配开头字段和长度
+                success+=1  #匹配成功次数+1
+                print(typename)  #匹配成功则输出type名
+                break
     if success==0:  #匹配失败返回unknown
         print("Unknown")
-        return "Unknown"
+
 
 check_isuser(4111111111111)
 check_isuser(4012555588886645)
