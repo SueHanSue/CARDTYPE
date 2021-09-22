@@ -15,12 +15,12 @@ def check_isuser(id):
     val=str(id)  #转为字符类型
     success=0  #定义匹配成功的次数
     for typename in condition_types.keys():#用键迭代
-        for x in condition_types[typename][0]:  #开头字段迭代
-            if val.startswith(x) and len(val) in condition_types[typename][1]:  #匹配开头字段和长度
+        res=filter(lambda bg :val.startswith(bg),condition_types[typename][0])  #fillter匹配开头字段
+        if list(res)!=[] and len(val) in condition_types[typename][1]: #判断filter过滤后的结果是否为空和字符长度是否匹配
                 success+=1  #匹配成功次数+1
                 print(typename)  #匹配成功则输出type名
                 break
-    if success==0:  #匹配失败返回unknown
+    if success==0:  #匹配失败则返回unknown
         print("Unknown")
 
 
